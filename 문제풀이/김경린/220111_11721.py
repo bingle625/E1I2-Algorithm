@@ -1,4 +1,5 @@
 # 10개씩 끊어 출력하기
+# 68ms
 
 def slicing(strs: str):
     if len(strs) > 10:

@@ -13,5 +13,4 @@ res = collections.defaultdict(list)
 for str in in_str:
     res[''.join(sorted(str))].append(str)
 
-
 print(list(res.values()))

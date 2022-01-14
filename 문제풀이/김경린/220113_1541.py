@@ -22,3 +22,7 @@ def min_sum(cal):
 
 cal = input()
 min_sum(cal)
+
+a = [0, 1, 2]
+del a[1]
+print(a[1])

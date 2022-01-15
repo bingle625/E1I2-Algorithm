@@ -1,14 +1,24 @@
+# 시간초과
+# for문 최대한 줄이기
+# if i in nums
+
+import sys
+
 
 def get_divisor(num):
     divisor = []
-    for i in range(1, num+1):
+    divisor_back = []
+
+    for i in range(1, int(num**(1/2))+1):
         if num % i == 0:
             divisor.append(i)
-    return divisor
+            if i != (num//i):
+                divisor_back.append(num//i)
+    return divisor+divisor_back[::-1]
 
 
 def to_fraction(nums):
-    if "." in nums:  # 소수일 때
+    if nums[0] == "0":  # 소수일 때
         nums = nums.split("0.")[1]
         if "(" in nums:
             nums = nums.replace("(", " ").replace(
@@ -24,17 +34,17 @@ def to_fraction(nums):
             parent = int(10**len(nums[0]))
             son = int(nums[0])
         son_divisor = get_divisor(son)
-        parent_divisor = get_divisor(parent)
-        if parent > son:
-            for i in son_divisor[::-1]:
-                if i in parent_divisor:
-                    parent /= i
-                    son /= i
+        for i in son_divisor[::-1]:
+            if parent > i:
+                if parent % i == 0:
+                    parent //= i
+                    son //= i
                     break
-        print(str(int(son))+"/"+str(int(parent)))
+
+        print(str(son)+"/"+str(parent))
 
 
-cnt = int(input())
+cnt = int(sys.stdin.readline())
 for i in range(cnt):
-    num = input()
+    num = sys.stdin.readline()
     to_fraction(num)

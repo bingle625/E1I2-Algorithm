@@ -1,7 +1,7 @@
 # 로그파일 재정렬
 
 # try 예시된 input 처리에는 적합하나, 식별자가 달라질 경우를 대비하지 못함.
-def reorderLogFiles(logs: list):
+def reorderLogFiles(logs: list) -> list:
     """
     :type logs: List[str]
     :rtype: List[str]

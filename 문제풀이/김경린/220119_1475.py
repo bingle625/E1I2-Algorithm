@@ -1,5 +1,3 @@
-from functools import cmp_to_key
-
 
 def set_num(num: str):
     num = num.replace('9', '6')

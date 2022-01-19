@@ -30,9 +30,6 @@ l1_tmp = l1_tmp.split('->')
 l2_tmp = l2_tmp.split('->')
 
 
-l1_head = []
-l2_head = []
-
 l1 = ListNode(int(l1_tmp[0]))
 l1_head = l1
 for i in range(len(l1_tmp)-1):

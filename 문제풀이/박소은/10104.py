@@ -5,12 +5,6 @@ class ListNode(object):
     def __init__(self, val, next=None):
         self.val = val
         self.next = next
-    def print_all_val(self):
-        temp = self
-        while temp.next != None:
-            print(temp.val, end=" ")
-            temp = temp.next
-        print(temp.val)
 
 def party_invitation(friend_num: int, round_num: int, removal_num: List) -> ListNode:
     friends_list = head = ListNode(0)

@@ -12,6 +12,7 @@ def reverseList(head: ListNode) -> ListNode:
             return prev
         next, node.next = node.next, prev
         return reverse(next, node)
+    
     return reverse(head)
 
 

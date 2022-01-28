@@ -1,4 +1,5 @@
 
+
 class ListNode:
     def __init__(self, val=0, prev=None, next=None):
         self.val = val
@@ -23,8 +24,6 @@ class DList:
     def insert(self, value, node):
         if self.is_empty():
             self.head = ListNode(value)
-            self.tail = ListNode(None, self.head)
-            self.head.next = self.tail
         else:
             if node.next:
                 tmp = node.next
@@ -46,7 +45,7 @@ def print_list(head):
 
 
 cnt = int(input())
-
+cur = None
 for i in range(cnt):
     ans = DList()
     strs = input()
@@ -65,14 +64,18 @@ for i in range(cnt):
             if ans.is_empty():
                 continue
             else:
-                if cur.next.val != None:
+                if cur == None:
+                    cur = ans.head
+                elif cur.next != None:
                     cur = cur.next
         elif x == '-':
-            if ans.is_empty() or cur.val == None:
+            if ans.is_empty() or cur == None or cur.val == None:
                 continue
             elif cur == ans.head:
-                cur.next = None
-                ans.head = None
+                ans.head = cur.next
+                if ans.head != None:
+                    ans.head.prev = None
+                cur = None
             else:
                 tmp = cur.next
                 cur = cur.prev

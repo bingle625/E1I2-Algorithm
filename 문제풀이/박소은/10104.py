@@ -5,16 +5,11 @@ class ListNode(object):
     def __init__(self, val, next=None):
         self.val = val
         self.next = next
-    def print_all_val(self):
-        temp = self
-        while temp.next != None:
-            print(temp.val, end=" ")
-            temp = temp.next
-        print(temp.val)
 
 def party_invitation(friend_num: int, round_num: int, removal_num: List) -> ListNode:
     friends_list = head = ListNode(0)
 
+    # 1 ~ friend_num으로 구성된 friend_list 만들기
     for j in range(1, friend_num + 1):
         friends_list.next = ListNode(j)
         friends_list = friends_list.next
@@ -24,6 +19,7 @@ def party_invitation(friend_num: int, round_num: int, removal_num: List) -> List
         prev = head
         j = 1
 
+        # 친구 삭제하기
         while friends_list is not None:
             if j % removal_num[i] == 0:
                 prev.next = prev.next.next

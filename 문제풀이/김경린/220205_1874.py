@@ -29,7 +29,7 @@ for j in range(1, num+1):
                 break
 
 if len(ans) != len(origin):
-    print("No")
+    print("NO")
 else:
     for i in sign:
         print(i)

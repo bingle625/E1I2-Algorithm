@@ -25,11 +25,14 @@ for key1 in dict.keys():
     if key2 in dict:
         if key2 in used:
             continue
+        elif key1 == key2:
+            continue
         else:
             pairs += dict.get(key1) * dict.get(key2)
             used[key1] = True
-            used[key2] = True
 
-print(dict)
-print(used)
+# 된다고 생각했지만 안되는 것:
+# 안된다고 생각했지만 되는 것:
+# print(dict)
+# print(used)
 print(pairs)

@@ -23,8 +23,10 @@ dict = collections.Counter(city_states)
 for key1 in dict.keys():
     key2 = key1[2:4] + key1[0:2]
     if key2 in dict:
+        # 예외1: FLMI를 검사하고, MIFL을 검사하면서 다시 FLMI를 검사하는 경우
         if key2 in used:
             continue
+        # 예외2: MIAMI MI, MILANO MI 와 같이, 같은 주에 있음에도, 서로를 만족하는 쌍
         elif key1 == key2:
             continue
         else:

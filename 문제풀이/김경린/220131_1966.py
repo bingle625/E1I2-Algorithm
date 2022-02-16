@@ -1,6 +1,7 @@
 import collections
 
 
+
 def first_max(queue, idx):
     while True:
         max_queue = max(queue)
@@ -36,3 +37,7 @@ for i in range(case):
         if idx == -1:
             print(cnt)
             break
+
+
+#힙큐
+

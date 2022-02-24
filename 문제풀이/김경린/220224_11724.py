@@ -11,29 +11,36 @@ for i in range(edge):
     graph[point2].append(point1)
 
 visited = [0 for _ in range(vertex)]
+visited_point = deque()
 
-cnt = 0
 
 
-def dfs(i):
-    if len(graph[i])>0:
-        while graph[i]:
-            point = graph[i].popleft()
-            if visited[point-1]==0:
-                visited[point-1] = 1
-                dfs(point)
+def bfs():
+    cnt = 0
+
+    for i in range(1,vertex+1):
+        if visited[i-1]==0:
+            visited_point.append(i)
+            while visited_point:
+                point = visited_point.popleft()
+
                 
-        done = 1
-    else:
-        done = 0
-    return done
+              
+                visited[point-1] = 1
+                for j in graph[point]:
+                    if visited[j-1]==0:
+                        visited[j-1] = 1
+                        visited_point.append(j)
+                        
+    
+
+            cnt += 1
+                    
+    return cnt
+
+
     
         
 
-visited[0]=1
-for i in range(1,vertex+1):
-   
-    done = dfs(i)
-    if done==1:
-        cnt+=1
-print(cnt)
+
+print(bfs())

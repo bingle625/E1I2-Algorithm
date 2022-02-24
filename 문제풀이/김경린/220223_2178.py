@@ -2,6 +2,8 @@ from collections import deque
 from sys import stdin
 import copy
 
+#문장의 순서만 조금 바꾼건데 시간초과가 해결,,,? 비교해보기
+
 dx = [0, 1, 0, -1]
 dy = [-1, 0, 1, 0]
 

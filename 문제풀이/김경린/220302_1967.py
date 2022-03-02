@@ -1,6 +1,7 @@
 
 from collections import defaultdict
-
+import sys 
+sys.setrecursionlimit(10**5)
 
 class TreeNode:
 
@@ -25,7 +26,7 @@ child_max = 0
 
 def dfs(node:TreeNode):
     global child_max
-    
+
     max_1 = 0
     max_2 = 0
     if len(node.child)>0:

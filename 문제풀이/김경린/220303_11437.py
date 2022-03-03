@@ -15,19 +15,22 @@ for i in range(node_num-1):
 
 global end
 
+queue = deque()
 
-def dfs(start):
+def bfs(start):
     global end
-    for child in tree[start]:
-        if visited[child]==0:
-            if child==end :
-                path.append(child)
-                return 1
-            visited[child] = 1
-            discover = dfs(child)
-            if discover==1:
-                path.append(child)
-                return 1
+    queue.append(start)
+    while queue:
+        start = queue.popleft()
+        for i in tree[start]:
+            if visited[i]==0:
+                visited[i] = str(i)
+                queue.append(i)
+                visited[i] = visited[start]+'-'+str(i)
+                if i == end:
+                    queue.clear()
+                    return visited[i]
+
 
 
 case = int(input())
@@ -37,28 +40,27 @@ for i in range(case):
     end_1,end_2 = map(int,stdin.readline().split())
 
     visited = [0 for _ in range(node_num+1)]
-    visited[1]=1
-    path = []
+    visited[1]="1"
+
     end = end_1
-    dfs(1)
-    path.append(1)
-    path_1 = path[:]
-    
-    visited = [0 for _ in range(node_num+1)]
-    visited[1]=1
-    end = end_2
-    path = []
-    dfs(1)
-    path_2 = path[:]
+    path_1=bfs(1)
 
     
-    path_2.append(1)
+    
+    visited = [0 for _ in range(node_num+1)]
+    visited[1]="1"
+    end = end_2
+    
+    path_2 = bfs(1)
+
+    path_1 = deque(path_1.split('-'))
+    path_2 = deque(path_2.split('-'))
     
     for i in range(len(path_1)):
-        top_1 = path_1.pop()
-        top_2 = path_2.pop()
+        top_1 = path_1.popleft()
+        top_2 = path_2.popleft()
         if len(path_1) and len(path_2):
-            if path_1[-1]!=path_2[-1]:
+            if path_1[0]!=path_2[0]:
                 print(top_1)
                 break
         else:

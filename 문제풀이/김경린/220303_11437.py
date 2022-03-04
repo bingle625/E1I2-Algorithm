@@ -2,6 +2,9 @@
 from collections import deque
 from sys import stdin
 
+
+
+
 node_num = int(stdin.readline())
 
 tree = [[] for _ in range(node_num+1)]
@@ -12,58 +15,42 @@ for i in range(node_num-1):
     tree[node2].append(node1)
 
 
+parent = [0 for _ in range(node_num+1)]
+level = [0 for _ in range(node_num+1)]
+visited = [0 for _ in range(node_num+1)]
+parent[1] = -1
 
-global end
 
 queue = deque()
 
 def bfs(start):
-    global end
     queue.append(start)
     while queue:
         start = queue.popleft()
         for i in tree[start]:
-            if visited[i]==0:
-                visited[i] = str(i)
+            if parent[i]==0:
+                parent[i] = start
+                level[i] = level[start] + 1
                 queue.append(i)
-                visited[i] = visited[start]+'-'+str(i)
-                if i == end:
-                    queue.clear()
-                    return visited[i]
 
+
+bfs(1)
 
 
 case = int(input())
 
 
-for i in range(case):
+for _ in range(case):
     end_1,end_2 = map(int,stdin.readline().split())
 
-    visited = [0 for _ in range(node_num+1)]
-    visited[1]="1"
-
-    end = end_1
-    path_1=bfs(1)
-
+    while level[end_1]!=level[end_2]:
+        if level[end_1]>level[end_2]:
+            end_1 = parent[end_1]
+        elif level[end_1]<level[end_2]:
+            end_2 = parent[end_2]
     
-    
-    visited = [0 for _ in range(node_num+1)]
-    visited[1]="1"
-    end = end_2
-    
-    path_2 = bfs(1)
-
-    path_1 = deque(path_1.split('-'))
-    path_2 = deque(path_2.split('-'))
-    
-    for i in range(len(path_1)):
-        top_1 = path_1.popleft()
-        top_2 = path_2.popleft()
-        if len(path_1) and len(path_2):
-            if path_1[0]!=path_2[0]:
-                print(top_1)
-                break
-        else:
-            print(top_1)
-
+    while end_1 != end_2:
+        end_1 = parent[end_1]
+        end_2 = parent[end_2]
+    print(end_1)
     

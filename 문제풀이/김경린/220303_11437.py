@@ -17,7 +17,6 @@ for i in range(node_num-1):
 
 parent = [0 for _ in range(node_num+1)]
 level = [0 for _ in range(node_num+1)]
-visited = [0 for _ in range(node_num+1)]
 parent[1] = -1
 
 

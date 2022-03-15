@@ -16,7 +16,6 @@ for _ in range(N-1):
         dic[a] = [b]
     else:
         dic[a].append(b)
-
     distance[b] = c
 
 

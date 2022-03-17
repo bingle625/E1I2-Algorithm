@@ -16,7 +16,15 @@ class trieNode:
 
 class solution:
 
-    root = trieNode()
+    def __init__(self):
+        self.root = trieNode()
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.root = None
+        self.root = trieNode()
 
     def trieTraverse(self, phoneNum: list):
         node = self.root
@@ -48,3 +56,5 @@ for _ in range(testCase):
         print("YES")
     else:
         print("NO")
+
+    s = None

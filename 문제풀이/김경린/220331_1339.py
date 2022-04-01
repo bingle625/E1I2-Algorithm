@@ -39,26 +39,17 @@ for i in range(str_num):
 
     
     for i in range(0,len(str_)):
-        alpha[str_[i]] += 10**(len(str_)-i)
+        alpha[str_[i]] += 10**(len(str_)-i-1)
 
 
-alpha = sorted(alpha.items(), key=lambda x: x[1], reverse=True)
-alpha_weight = defaultdict(int)
-for i in alpha:
-    alpha_weight[i[0]] = num
+
+values = []
+for val in alpha.values():
+    values.append(val)
+
+sum = 0
+for val in sorted(values,reverse=True):
+    sum += val*num
     num -= 1
 
-for idx in range(len(origin)):
-    for key in alpha_weight:
-        origin[idx] = origin[idx].replace(key,str(alpha_weight[key]))
-
-
-        
-sum = 0
-
-for num in origin:
-    sum += int(num)
-
 print(sum)
-
-

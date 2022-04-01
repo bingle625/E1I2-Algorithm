@@ -34,57 +34,31 @@ origin = []
 max_len = 0
 strs = defaultdict(list)
 for i in range(str_num):
-    str_ = str(stdin.readline())
+    str_ = str(stdin.readline().strip())
     origin.append(str_)
 
-    str_ = deque(str_)
+    
+    for i in range(0,len(str_)):
+        alpha[str_[i]] += 10**(len(str_)-i)
 
 
-    max_len = max(max_len,len(str_))
-    while len(str_):
-        c = str_.popleft()
-        strs[len(str_)+1].append(c)
-
-
-
-for key in range(max_len,0,-1):
-    if len(strs[key])>1:
-        for val in strs[key]:
-            if alpha[val] != 0:
-                strs[key].remove(val)
-        if len(strs[key])>1:
-            more_weight = False
-            for k in range(key-1,0,-1):
-                for compare_key in strs[key]:
-                    if compare_key in strs[k]:
-                        if alpha[val]==0:
-                            alpha[compare_key] = num
-                            num -= 1
-                        
-            # 나머지 알파벳의 가중치가 똑같을 때
-            for k in strs[key]:
-                if alpha[k]==0:
-                    alpha[k] = num
-                    num -= 1
-        else:
-            if alpha[strs[key][0]]==0:
-                alpha[strs[key][0]] = num
-                num -= 1
-
-        
-    else:
-        if alpha[strs[key][0]] == 0:
-            alpha[strs[key][0]] = num
-            num -= 1
-
+alpha = sorted(alpha.items(), key=lambda x: x[1], reverse=True)
+alpha_weight = defaultdict(int)
+for i in alpha:
+    alpha_weight[i[0]] = num
+    num -= 1
 
 for idx in range(len(origin)):
-    for key in alpha:
-        origin[idx] = origin[idx].replace(key,str(alpha[key]))
+    for key in alpha_weight:
+        origin[idx] = origin[idx].replace(key,str(alpha_weight[key]))
 
+
+        
 sum = 0
 
 for num in origin:
     sum += int(num)
 
 print(sum)
+
+

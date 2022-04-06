@@ -38,7 +38,7 @@ for bag in bags:
     
     if len(availJewel):
         sum -= heapq.heappop(availJewel)
-    if not len(jewels):
+    elif not len(jewels):
         break
 
 

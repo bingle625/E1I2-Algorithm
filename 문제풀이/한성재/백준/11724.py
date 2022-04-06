@@ -1,45 +1,40 @@
-# 11724번
+# 11724번 연결 요소의 개수
 
 
-marked = []
-dic = {}
+import collections
+import queue
+from sys import stdin
 
-
-def iterative_dfs(discovered: list, start_v: int):
-    if start_v in discovered:
-        return discovered
-    else:
-        stack = [start_v]
-        while stack:
-            v = stack.pop()
-            if v not in discovered:
-                discovered.append(v)
-                for w in dic[v]:
-                    stack.append(w)
-        return discovered
-
-
-N, M = map(int, input().split())
-
-for i in range(M):
-    u, v = map(int, input().split())
-
-    if u not in dic:
-        dic[u] = [v]
-    else:
-        dic[u].append(v)
-
-    if v not in dic:
-        dic[v] = [u]
-    else:
-        dic[v].append(u)
 
 discovered = []
-cnt = 0
+size = 0
 
-for i in range(1, N+1):
-    if i not in discovered:
-        cnt += 1
-    discovered = iterative_dfs(discovered, i)
+dic = collections.defaultdict(list)
 
-print(cnt)
+N , M  = map(int, input().split())
+
+for _ in range(M):
+    u,v = map(int, stdin.readline().split())
+    dic[u].append(v)
+    dic[v].append(u)
+    
+
+def iterative_bfs(start_v):
+    discovered.append(start_v)
+    queue = collections.deque([start_v])
+    while queue:
+        v = queue.popleft()
+        for w in dic[v]:
+            if w not in discovered:
+                discovered.append(w)
+                queue.append(w)
+    return 1
+
+dic_keys = list(dic.keys())
+
+for key in range(1,N+1):
+    if key not in discovered:
+        size += iterative_bfs(key)
+    else:
+        continue
+print(size)

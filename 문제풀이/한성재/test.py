@@ -1,1 +1,10 @@
-print("Hello 한성재")
+INTERSTERATE = 0.05
+YEAR = 10
+MONEY = 100000
+
+for i in range(YEAR):
+    MONEY += MONEY * INTERSTERATE
+
+MONEY = MONEY // 100 * 100
+
+print(MONEY)

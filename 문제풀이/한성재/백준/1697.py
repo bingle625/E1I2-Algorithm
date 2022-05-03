@@ -1,18 +1,34 @@
 #1697번 숨바꼭질
 
+from collections import deque
 import collections
-import sys
 
 
-N, K  = map(int, input().split())
-graph = collections.defaultdict([])
+N, K = map(int,input().split())
 
-for i in range(N, K):
-    if i-1 >= N-1:
-        graph[i].append(i-1)
-    if i+1 <=K+1:
-        graph[i].append(i+1)
-    if i % 2 == 0 and i //2 >= N//2:
-        graph[i].append(i//2)
+q1 = deque([N])
+subq1 = deque([])
+discovered1 = dict([])
+number1 = 0
+
+def findN(q,subq,discovered,number):
+    while True:
+        while q:
+            v = q.popleft()
+            if v == K:
+                return number
+            else:
+                if v-1>= -1 and v-1 not in discovered:
+                    discovered[v-1] = True
+                    subq.append(v-1)
+                if v+1 <= 100001 and v+1 not in discovered:
+                    discovered[v+1] = True
+                    subq.append(v+1)
+                if v*2 <= 100001 and v*2 not in discovered:
+                    discovered[v*2] = True
+                    subq.append(v*2)
         
-def goRoad(number,gr):
+        subq, q = q, subq
+        number += 1
+        
+print(findN(q1,subq1,discovered1,0))

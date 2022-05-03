@@ -1,0 +1,9 @@
+import bisect
+
+class Solution(object):
+    def twoSum(self, numbers, target):
+        for k, v in enumerate(numbers):
+            expected = target - v
+            i = bisect.bisect_left(numbers, expected, k + 1)
+            if i < len(numbers) and numbers[i] == expected:
+                return k + 1, i + 1

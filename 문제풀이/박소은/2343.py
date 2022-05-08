@@ -19,7 +19,6 @@ while left <= right:
             i += 1
     
     if len(lengths) == M:
-        print(max(lengths))
         break
     elif len(lengths) > M:
         # cd 크기를 늘려야 됨
@@ -27,3 +26,5 @@ while left <= right:
     else:
         right = mid - 1
     lengths = [0]
+
+print(max(lengths))

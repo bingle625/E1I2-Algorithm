@@ -12,22 +12,23 @@ arr = [list(map(int, stdin.readline().strip().split())) for _ in range(N)]
 numbers = Counter({1: 0, 0: 0})
 
 
-def dore(sR, eR, sH, eH):
-    a = arr[sR][sH]
+def dore(x, y, N):
+    a = arr[x][y]
 
-    for i in range(sR, eR):
-        for j in range(sH, eH):
+    for i in range(x, x+N):
+        for j in range(y, y+N):
             if arr[i][j] != a:
-                dore(sR, eR//2, sH, eH//2)
-                dore(eR//2, eR, sH, eH//2)
-                dore(sR, eR//2, eH//2, eH)
-                dore(eR//2, eR, eH//2, eH)
+                dore(x, y, N//2)
+                dore(x, y+N//2, N//2)
+                dore(x+N//2, y, N//2)
+                dore(x+N//2, y+N//2, N//2)
+                return
 
     numbers[a] += 1
     return
 
 
-dore(0, N, 0, N)
+dore(0, 0, N)
 
 print(numbers[0])
 print(numbers[1])

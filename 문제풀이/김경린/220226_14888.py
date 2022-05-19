@@ -1,66 +1,32 @@
 from sys import stdin
+import sys
 
 cnt = int(stdin.readline())
 nums = list(map(int,stdin.readline().split()))
-num_sign = list(map(int,stdin.readline().split()))
-signs = []
+signs = list(map(int,stdin.readline().split()))
 
-for i in range(4):
-    if i==0:
-        for j in range(num_sign[i]):
-            signs.append('+')
-
-    elif i==1:
-        for j in range(num_sign[i]):
-            signs.append('-')
-
-    elif i==2:
-        for j in range(num_sign[i]):
-            signs.append('*')
+max_result = -sys.maxsize
+min_result = sys.maxsize
 
 
-    elif i==3:
-        for j in range(num_sign[i]):
-            signs.append('/')
+def dfs(result,i,plus,minus,multi,divide):
+    global max_result, min_result
 
-prev_signs = []
-results = []
+    if i == cnt:
+        max_result = max(result, max_result)
+        min_result = min(result, min_result)
+        return
+    if plus > 0:
+        dfs(result + nums[i], i+1, plus-1, minus, multi, divide)
+    if minus > 0:
+        dfs(result - nums[i], i+1, plus, minus-1, multi, divide)
+    if multi > 0:
+        dfs(result * nums[i], i+1, plus, minus, multi-1, divide)
+    if divide > 0:
+        dfs(int(result / nums[i]), i+1, plus, minus, multi, divide-1)
 
+dfs(nums[0],1,signs[0],signs[1],signs[2],signs[3])
 
-def dfs(signs):
-    if len(signs)==0:
-        results.append(prev_signs[:])
-    for sign in signs:
-        next_signs = signs[:]
-        next_signs.remove(sign)
-        prev_signs.append(sign)
-        dfs(next_signs)
-        prev_signs.pop()
-    
-
-dfs(signs)
-
-#중복 제거를 위해 list를 immutable하도록
-results = [tuple(i) for i in results]
-results = list(set(results))
-cal_results = []
-
-for result in results:
-    tmp = nums[0]
-    for i in range(1,len(nums)):
-        if result[i-1]=='+':
-            tmp +=nums[i]
-        elif result[i-1]=='-':
-            tmp -=nums[i]
-        elif result[i-1]=='*':
-            tmp *=nums[i]
-        elif result[i-1]=='/':
-            tmp /=nums[i]
-            tmp = int(tmp)
-
-    cal_results.append(tmp)
-
-cal_results.sort()
-print(cal_results[-1])
-print(cal_results[0])
+print(max_result)
+print(min_result)
 

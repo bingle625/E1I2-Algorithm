@@ -1,31 +1,19 @@
-import sys
-from sys import stdin
-sys.setrecursionlimit(10**5)
+import matplotlib.pyplot as plt
+data = {'Frogs': 30, 'Hogs': 40, 'Dogs': 10, 'Logs': 20}
+print("data = ", data)
 
-
-def findway(lst: list, i, j):
-
-    if i < 0 or j < 0 or j >= len(lst[i]):
-        return 0
-
-    if lst[i][j] == 1:
-        if i == 0:
-            return 1
-        else:
-            return findway(lst, i-1, j+1) + findway(lst, i-1, j) + findway(lst, i-1, j-1)
-    else:
-        return 0
-
-
-n, m = list(map(int, stdin.readline().split()))
-board = []
-for i in range(n):
-    board.append(list(map(int, stdin.readline().split())))
-
-
-sum = 0
-for i in range(len(board[0])):
-    sum += findway(board, n-1, i)
-
-
-print(sum)
+data = sorted(data.items(), key=lambda x: x[1])
+print("sorted data = ", data)
+labels = list()
+sizes = list()
+for item in data:
+    labels.append(item[0])
+    sizes.append(item[1])
+print("labels=", labels)
+print("sizes = ", sizes)
+explode = (0, 0, 0, 0.1)
+ax = plt.axes()
+ax.pie(sizes, explode=explode, labels=labels,
+       autopct='%.0f%%', shadow=True, startangle=90)
+ax.axis('equal')
+plt.show()

@@ -30,8 +30,9 @@ def sol():
     q = deque(list(visited2.keys()))
     stair = -1
     while q:
-        q2 = copy.deepcopy(q)
-        q.clear()
+        q2 = deque([])
+        while q:
+            q2.append(q.pop())
         stair += 1
         while q2:
             nextElem = q2.popleft()

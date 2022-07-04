@@ -38,6 +38,6 @@ def solution(new_id: str):
     return answer
 
 
-s = solution("!@#asldknsadasdasdlknsa@!#@#!12312425")
+s = solution("!@#asldknsadasdasdknsa@!#@#!12312425")
 
 print(s)

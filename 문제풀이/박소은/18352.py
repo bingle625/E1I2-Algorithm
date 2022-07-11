@@ -23,12 +23,11 @@ dist[X] = 0     # 시작 노드는 소요 시간=0
 while Q:
     time, node = heapq.heappop(Q)
     for adjNode in graph[node]:
-        if adjNode not in dist or dist[adjNode] > time+1:
+        if adjNode not in dist:
             dist[adjNode] = time+1
             heapq.heappush(Q, (time+1, adjNode))
 
 result = []
-print(dist)
 for key, val in dist.items():
     if val == K:
         result.append(key)

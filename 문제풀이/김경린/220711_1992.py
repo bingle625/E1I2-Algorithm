@@ -14,14 +14,3 @@ def isSame(startX, finishX, startY, finishY):
     return True
 
 def compress()
-
-1 
-1111 0000
-1111 0000
-0001 1100
-0001 1100
-
-1111 0000
-1111 0011
-1111 0011
-    

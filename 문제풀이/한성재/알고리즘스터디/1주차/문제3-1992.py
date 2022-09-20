@@ -1,3 +1,4 @@
+# 쿼드트리
 from sys import stdin
 
 

@@ -13,3 +13,4 @@ for i in range(len(nums)):
 
 for i in range(len(nge)):
     print(nge[i], end=' ')
+

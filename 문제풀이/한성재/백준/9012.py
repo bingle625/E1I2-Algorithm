@@ -1,24 +1,12 @@
-# 9012번 괄호
+N, M = map(int, input().rstrip().split())
 
-import sys
+arr = list([10005]*M)
 
+for i in range(N):
+    temp = list(map(int, input().rstrip().split()))
+    for k in range(len(temp)):
+        if temp[k] < arr[k]:
+            print(temp[k], arr[k])
+            arr[k] = temp[k]
 
-number = int(input())
-
-for _ in range(number):
-    chars = list(sys.stdin.readline().rstrip())
-    
-    buff  = 0
-    for char in chars:
-        if char == '(':
-            buff += 1
-        elif char == ')' and buff > 0:
-            buff += -1
-        else:
-            buff = -1
-            break
-            
-    if buff == 0:
-        print("YES")
-    else:
-        print("NO")
+print(max(arr))

@@ -17,7 +17,7 @@ def solution(n, build_frame):
                     #다른 기둥의 받침인가
                     if [cmd[0]+directions[0][0], cmd[1]+directions[0][1], 0] in answer:
                         success = False
-                    # 다른 보의 받침인가, 그럻다면, 그 보의 반대쪽에 다른 기둥이 없나
+                    # 다른 보의 받침인가, 그럻다면, 그 보가 만족그 보의 반대쪽에 다른 기둥이 없나
                     if [cmd[0]+directions[0][0], cmd[1]+directions[0][1], 1] in answer:
                         if [cmd[0]+directions[0][0]+1,cmd[1], 0] not in answer:
                              success = False

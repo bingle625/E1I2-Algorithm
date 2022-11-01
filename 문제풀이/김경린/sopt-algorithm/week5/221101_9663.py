@@ -2,26 +2,24 @@ from sys import stdin
 
 n = int(stdin.readline())
 
-queen = []
+row = [ 0 for _ in range(n)]
 
-def is_checked(x,y):
-    for i,j in queen:
-        if i == x or j == y or abs(x-i) == abs(y-j):
+def is_checked(x):
+    for i in range(x):
+        if row[i] == row[x] or abs(x-i) == abs(row[x]-row[i]):
             return True
     return False
 
-arr = [[0 for _ in range(n)] for _ in range(n)]
-
-def nqueens(x,cnt):
-    if x == n-1:
+def nqueens(x):
+    global cnt
+    if x == n:
         cnt += 1
-        return cnt
+        return
     for i in range(n):
-        if not is_checked(x+1,i):
-            queen.append((x+1,i))
-            cnt = nqueens(x+1,cnt)
-            queen.pop()
-    return cnt
+        row[x] = i
+        if not is_checked(x):
+            nqueens(x+1)
+
 cnt = 0
-cnt = nqueens(-1,cnt)
+nqueens(0)
 print(cnt)

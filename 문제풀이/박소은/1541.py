@@ -1,20 +1,30 @@
-lines = input()
-split_line = []
-num = []    # 숫자를 잠시 저장할 리스트
-cal_line = []   # 계산할 문자열을 저장
+# -가 나온 뒤: 양수를 다 더해서 괄호로 묶는다
 
-for line in lines:
-    if (line >= '0') and (line <= '9'):
-        num.append(line)
+line = input()
+result = 0
+number = 0  # 1~5 자리의 숫자
+isMinus = False
+
+for char in line:
+    if '0' <= char <= '9':
+        number = number*10 + int(char)
     else:
-        split_line.append(int("".join(num)))
-        num = []
-        split_line.append(line)
-split_line.append(int(''.join(num)))
+        if char == '+':
+            if isMinus == True:
+                result -= number
+            else:
+                result += number
+        else:   # '-'인 경우
+            if isMinus == False:
+                isMinus = True
+                result += number
+            else:
+                result -= number
+        number = 0
 
+if isMinus == True:
+    result -= number
+else:
+    result += number
 
-for i in range(len(split_line)):
-    cal_line.append(split_line[i])
-    if (split_line[i] == '-'):
-        cal_line.append('(')
-    
+print(result)

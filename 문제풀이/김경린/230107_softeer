@@ -1,0 +1,31 @@
+import sys
+from collections import defaultdict
+import copy
+def contest(players):
+
+    players_dict = defaultdict(int)
+    players_sorted = copy.deepcopy(players)
+    players_sorted.sort()
+    for i in range(len(players)-1):
+        if players_sorted[i] != players_sorted[i+1]:
+            players_dict[players_sorted[i]] = len(players) - i
+
+        players_dict[players_sorted[-1]] = 1
+
+    for i in players:
+        print(players_dict[i], end=' ')
+    print('')
+    
+    
+
+player_num = int(sys.stdin.readline().rstrip())
+
+final_result = [0 for _ in range(player_num)]
+for i in range(3):
+    players = list(map(int, sys.stdin.readline().rstrip().split()))
+    contest(players)
+    for j in range(player_num):
+        final_result[j] += players[j]
+
+
+contest(final_result)

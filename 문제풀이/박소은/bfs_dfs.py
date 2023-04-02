@@ -26,6 +26,9 @@ def BFS(root):
 # print(BFS(1))
 
 
+import sys
+sys.setrecursionlimit(10**6)
+
 def recursive_dfs(root, visited=[]):
     visited.append(root)
     

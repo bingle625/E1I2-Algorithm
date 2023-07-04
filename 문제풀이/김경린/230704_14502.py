@@ -1,3 +1,4 @@
+from collections import deque
 from copy import deepcopy
 from sys import stdin
 
@@ -22,33 +23,36 @@ def get_safe(maps):
                 cnt += 1
     return cnt
 
-def spread_virus(maps, x, y, visited):
-    for i in range(4):
-        next_x = x + dx[i]
-        next_y = y + dy[i]
-        if 0 <= next_x < m and 0 <= next_y < n and maps[next_y][next_x] == 0:
-            visited[next_y][next_x] = 1
-            maps[next_y][next_x] = 2
-            spread_virus(maps, next_x, next_y, visited)
-
+def spread_virus(origin_maps):
+    maps = deepcopy(origin_maps)
+    q = deque()
+    for y in range(n):
+        for x in range(m):
+            if maps[y][x] == 2:
+                q.append((x, y))
+    while len(q):
+        x, y = q.popleft()
+        for i in range(4):
+            next_x = x + dx[i]
+            next_y = y + dy[i]
+            if 0 <= next_x < m and 0 <= next_y < n and maps[next_y][next_x] == 0:
+                maps[next_y][next_x] = 2
+                q.append((next_x, next_y))
+    return maps
+            
 def create_wall(x, y, m, n, maps, wall_num):
     global max_safe
     if wall_num == 0:
-        visited = [ [0 for _ in range(m)] for _ in range(n)]
-        for y in range(n):
-            for x in range(m):
-                if maps[y][x] == 2 and visited[y][x] == 0:
-                    visited[y][x] = 1
-                    spread_virus(maps, x, y, visited)
+        spread_map=spread_virus(maps)
         
-        safe = get_safe(maps)
+        safe = get_safe(spread_map)
         max_safe = max(max_safe, safe)
     else:
         for i in range(n):
             for j in range(m):
                 if i*m + j > y*m + x and maps[i][j] == 0:
                     maps[i][j] = 1
-                    create_wall(j, i, m, n, deepcopy(maps), wall_num-1)
+                    create_wall(j, i, m, n, maps, wall_num-1)
                     maps[i][j] = 0
                     
 for y in range(n):

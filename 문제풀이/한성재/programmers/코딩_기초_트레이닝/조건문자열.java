@@ -3,7 +3,6 @@ package programmers.코딩_기초_트레이닝;
 import java.util.Objects;
 
 public class 조건문자열 {
-    class Solution {
         public static int solution(String ineq, String eq, int n, int m) {
             if (n == m && eq.equals("=")) {
                 return 1;
@@ -14,9 +13,8 @@ public class 조건문자열 {
 
             return 0;
         }
-    }
     public static void main(String[] args) throws Exception {
-        int answer = Solution.solution(">","!",41,78);
+        int answer = solution(">","!",41,78);
 
         System.out.println(answer);
     }
